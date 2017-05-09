@@ -1,9 +1,14 @@
 const electron = require('electron')
 // Module to control application life.
-const app = electron.app
+const {app, Menu} = require('electron')
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
+//requiring electron dialogs to access system dialogs
+const dialog = electron.dialog;
+
+const fs = require('fs');
 const path = require('path')
 const url = require('url')
 
@@ -13,11 +18,28 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1024, height: 768})
+  mainWindow = new BrowserWindow({width: 1024, height: 768});
+
+  //define template for the menu
+  var menuTemplate = [{
+        label: "Application",
+        submenu: [{
+            label: 'Sound Control',
+            accelerator: "CommandOrControl+O",
+            click: function() {
+                openFolderDialog();
+            }
+        }]
+    }];
+
+  var menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+  //load dev console on start.
+  mainWindow.webContents.openDevTools();
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, './app/index.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -56,5 +78,29 @@ app.on('activate', function () {
   }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+
+//defining openFolderDialog to handle the files selected from dialog
+function openFolderDialog(){
+  dialog.showOpenDialog(mainWindow, {
+    filters: [
+      {name: 'Audios', extensions: ['mp3', 'ogg']},
+    ],
+    properties: ['openDirectory']
+  },function(filePath){
+    fs.readdir(filePath[0],function(err, files){
+      var arr = [];
+      for(var i=0;i<files.length;i++)
+      {
+        if(files[i].substr(-4) === ".mp3")
+        {
+          arr.push(files[i]);
+        }
+      }
+      console.log(arr);
+      var objToSend = {};
+      objToSend.path = filePath[0];
+      objToSend.files = arr;
+      mainWindow.webContents.send('audio-file', objToSend);
+    })
+  })
+}

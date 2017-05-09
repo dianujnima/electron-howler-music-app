@@ -1,28 +1,24 @@
 {
-  "name": "electron-quick-start",
+  "name": "electron-howler-music-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A minimal Howler based music player application in electron JS",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/dianujnima/electron-howler-music-app.git",
   "keywords": [
     "Electron",
     "quick",
     "start",
-    "tutorial",
+    "howler",
+    "music app",
+    "desktop app",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Dianuj Nima",
+  "license": "MIT",
   "devDependencies": {
     "electron": "~1.6.2"
-  },
-  "dependencies": {
-    "angular": "^1.6.4",
-    "angularjs": "0.0.1",
-    "bootstrap": "^3.3.7",
-    "howler": "^2.0.3"
   }
 }

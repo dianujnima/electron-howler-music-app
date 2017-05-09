@@ -1,0 +1,26 @@
+{
+  "name": "electron-howler-music-app",
+  "version": "1.0.0",
+  "description": "A minimal Howler based music player application in electron JS",
+  "authors": [
+    "Junaid Amin <junaidameen2009@gmail.com>"
+  ],
+  "main": "main.js",
+  "license": "MIT",
+  "homepage": "https://github.com/dianujnima/electron-howler-music-app.git",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.5",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.5.8",
+    "howler": "^2.0.1",
+    "angular-siri-wave": "*"
+  }
+}

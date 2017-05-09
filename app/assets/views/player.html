@@ -1,0 +1,29 @@
+<div class="row maxHeight">
+	<div class="col-md-12 maxHeight">
+		<div id="title">
+			<span id="track">{{trackName}}</span>
+			<div id="timer">{{updateTimer}}</div>
+			<div id="duration">{{timer}}</div>
+		</div>
+		<div class="controlsOuter">
+			<div class="controlsInner">
+				<div id="loading"></div>
+				<div class="btn" id="playBtn" ng-show="!songPlaying" ng-click="playPause()"></div>
+				<div class="btn" id="pauseBtn" ng-show="songPlaying" ng-click="playPause()"></div>		
+				<div class="btn" id="prevBtn" ng-click="prevSong()"></div>		
+				<div class="btn" id="nextBtn" ng-click="nextSong()"></div>		
+			</div>
+			<div class="btn" id="playListBtn" ng-click="showPlaylist()"></div>
+		</div>
+		<div id="waveform" ng-show="songPlaying" ng-click="seekToTime($event)"></div>
+		<div id="bar" ng-hide="songPlaying"></div>
+		<div id="progress"></div>
+		<div id="playlist" ng-show="playlistVisible">
+			<div id="list">
+				<div class="list-song" ng-repeat="song in player.playlist" ng-click="playPlaylistSong($index)">
+					{{song.name}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
