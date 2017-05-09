@@ -6,14 +6,14 @@ A minimal Howler based music player application in electron JS
 ### npm
 
 ```shell
-npm install angular
+npm install
 ```
 Then go to app folder and install
 
 ### bower
 
 ```shell
-bower install angular
+bower install
 ```
 ## License
 
