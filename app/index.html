@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Music Player!</title>
     <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./bower_components/angularjs-slider/dist/rzslider.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
   </head>
   <body ng-app="Player">
@@ -14,12 +15,16 @@
 
   <script>
     window.$ = window.jQuery = require('./bower_components/jquery/dist/jquery.min.js');
+    const remote = require('electron').remote;
+    const mainProcess = remote.require('./main');
+    const ipc = require('electron').ipcRenderer;
   </script>
 
   <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="./bower_components/angular/angular.js"></script>
   <script src="./bower_components/angular-route/angular-route.min.js"></script>
   <script src="./bower_components/angular-siri-wave/siriwave.js"></script>
+  <script src="./bower_components/angularjs-slider/dist/rzslider.min.js"></script>
   <script src="./bower_components/howler/dist/howler.min.js"></script>
   <script src="assets/js/player.js"></script>
 
@@ -27,6 +32,6 @@
 
   <script>
     // You can also require other files to run in this process
-    // require('./renderer.js')
+    require('../renderer.js')
   </script>
 </html>

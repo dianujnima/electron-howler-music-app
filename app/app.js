@@ -1,7 +1,8 @@
 'use strict';
 angular.module('Player', [
 	'ngRoute',
-	'Player.player'
+	'Player.player',
+	'rzModule'
 ])
 
 .config(['$routeProvider',function($routeProvider) {

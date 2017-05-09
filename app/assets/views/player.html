@@ -1,9 +1,14 @@
-<div class="row maxHeight">
+<div class="row maxHeight" ng-show="songsLoaded">
 	<div class="col-md-12 maxHeight">
 		<div id="title">
 			<span id="track">{{trackName}}</span>
 			<div id="timer">{{updateTimer}}</div>
 			<div id="duration">{{timer}}</div>
+			<div>
+				<rzslider
+		         rz-slider-model="slider.value"
+		         rz-slider-options="slider.options"></rzslider>
+			</div>
 		</div>
 		<div class="controlsOuter">
 			<div class="controlsInner">
@@ -26,4 +31,9 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row maxHeight appStart" ng-hide="songsLoaded">
+	<h1>Welcome to music player</h1>
+	<a href="#" ng-click="openDialog()" class="button">Open Songs</a>
+	<small>2017 by Dianuj Nima</small>
 </div>

@@ -21,6 +21,7 @@
     "bootstrap": "^3.3.6",
     "angular-route": "^1.5.8",
     "howler": "^2.0.1",
-    "angular-siri-wave": "*"
+    "angular-siri-wave": "*",
+    "angularjs-slider": "^6.1.1"
   }
 }

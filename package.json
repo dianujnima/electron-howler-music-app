@@ -4,7 +4,8 @@
   "description": "A minimal Howler based music player application in electron JS",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . ElectronMusicApp"
   },
   "repository": "https://github.com/dianujnima/electron-howler-music-app.git",
   "keywords": [

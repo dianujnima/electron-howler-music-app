@@ -11,7 +11,7 @@ const dialog = electron.dialog;
 const fs = require('fs');
 const path = require('path')
 const url = require('url')
-
+const buttons = [ 'Cancel', 'OK'];
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -22,12 +22,25 @@ function createWindow () {
 
   //define template for the menu
   var menuTemplate = [{
-        label: "Application",
+        label: "Options",
         submenu: [{
-            label: 'Sound Control',
+            label: 'Open Music',
             accelerator: "CommandOrControl+O",
             click: function() {
                 openFolderDialog();
+            }
+        },{
+            label: 'Quit',
+            // accelerator: "CommandOrControl+Q",
+            click: function() {
+              let agree = messageBox();
+                // app.quit();
+              dialog.showMessageBox({ type: 'info', buttons: buttons, message: 'Do you want to exit?' }, function (buttonIndex) {
+                console.log(buttonIndex);
+                  if(buttonIndex){
+                    app.quit();
+                  };
+              });
             }
         }]
     }];
@@ -60,7 +73,6 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
-
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
@@ -83,24 +95,35 @@ app.on('activate', function () {
 function openFolderDialog(){
   dialog.showOpenDialog(mainWindow, {
     filters: [
-      {name: 'Audios', extensions: ['mp3', 'ogg']},
+      {name: 'Audios', extensions: ['mp3', 'm4a']},
     ],
     properties: ['openDirectory']
   },function(filePath){
-    fs.readdir(filePath[0],function(err, files){
-      var arr = [];
-      for(var i=0;i<files.length;i++)
-      {
-        if(files[i].substr(-4) === ".mp3")
-        {
-          arr.push(files[i]);
+    console.log("filePath ", filePath);
+    if(filePath !== undefined){
+      fs.readdir(filePath[0],function(err, files){
+        var arr = [];
+        for(var i=0;i<files.length;i++){
+          if(files[i].substr(-4) === ".mp3" || files[i].substr(-4) === ".m4a"){
+            arr.push(files[i]);
+          }
         }
-      }
-      console.log(arr);
-      var objToSend = {};
-      objToSend.path = filePath[0];
-      objToSend.files = arr;
-      mainWindow.webContents.send('audio-file', objToSend);
-    })
+        var objToSend = {};
+        objToSend.path = filePath[0];
+        objToSend.files = arr;
+        mainWindow.webContents.send('audio-file', objToSend);
+        
+      });
+    }
   })
 }
+
+function messageBox(){
+  
+
+  dialog.showMessageBox({ type: 'info', buttons: buttons, message: 'Exit?' }, function (buttonIndex) {
+      return buttonIndex;
+  });
+}
+
+exports.openFolderDialog = openFolderDialog;
